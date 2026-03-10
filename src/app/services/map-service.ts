@@ -43,6 +43,9 @@ export class MapService {
     this.markers.push(marker);
     if (this.markerCluster) {
       this.markerCluster.addLayer(marker);
+    } else {
+      // Fallback: add directly to map if markerCluster is not available
+      marker.addTo(this.map);
     }
     return marker;
   }
