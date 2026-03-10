@@ -1,0 +1,20 @@
+<div class="xarxaPlantes">
+  <mat-card class="full-page-card">
+    <mat-card-header class="map-header">
+      <mat-card-title>Les nostres instal·lacions</mat-card-title>
+      <mat-card-subtitle>Visualitza totes les plantes solars en el mapa</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    <div class="mapContainer">
+      <div #map id="map"></div>
+    </div>
+    <div class="lista-container">
+      <ul>
+        @for (planta of plantesList(); track planta) {
+          <li>{{ planta }}</li>
+        }
+      </ul>
+    </div>
+    </mat-card-content>
+  </mat-card>
+</div>

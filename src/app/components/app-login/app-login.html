@@ -1,0 +1,70 @@
+<div class="home-container">
+  <mat-card class="full-page-card">
+    <mat-card-title class="card-header"> Login </mat-card-title>
+    <form [formGroup]="loginForm" class="form-container" (ngSubmit)="login()">
+      @if (loginForm.controls['email'].errors) {
+        @for (err of getFormErrorsToMissatge('email'); track err) {
+          <mat-error align="start"> {{ err }} </mat-error>
+        }
+      }
+      <mat-form-field class="full-input">
+        <mat-label>Enter your email</mat-label>
+        <input
+          matInput
+          type="text"
+          id="inputEmail"
+          formControlName="email"
+          #input
+          placeholder="Ex. solar@solar.es"
+          (input)="onInput($event)"
+        />
+      </mat-form-field>
+
+      @if (loginForm.controls['password'].errors) {
+        @for (err of getFormErrorsToMissatge('password'); track err) {
+          <mat-error align="start"> {{ err }} </mat-error>
+        }
+      }
+      <mat-form-field class="full-input">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          id="inputPassword"
+          formControlName="password"
+          #input
+          (input)="onInput($event)"
+        />
+      </mat-form-field>
+
+      @if (errorFormMessage()) {
+        <mat-error>{{ errorFormMessage() }}</mat-error>
+      }
+      <button mat-raised-button type="submit" color="primary" class="btn-submit" [disabled]="!loginForm.valid">
+        Login
+      </button>
+
+      <a class="btn-link" [routerLink]="['/register']">Enregistra't</a>
+
+      <!-- <mat-form-field>
+        <mat-label>Select me</mat-label>
+        <mat-select>
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+        <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+      </mat-form-field> -->
+    </form>
+
+    <!--
+    <span>Error de camp</span>
+    <pre>{{ loginForm.controls['email'].errors | json }}</pre>
+    <span>Error de contrasenya</span>
+    <pre>{{ loginForm.controls['password'].errors | json }}</pre>
+    <span>Error intern</span>
+    <pre>{{ errorFormMessage() | json }}</pre> -->
+  </mat-card>
+</div>
+<!--
+[ngClass]="condició ? resposta positiva, resposta negativa"
+[ngClass="{nomClasse: funció condició, nomClasse: funció condició, nomClasse: funció condició, etc}"]
+-->

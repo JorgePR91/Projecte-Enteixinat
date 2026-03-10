@@ -1,0 +1,47 @@
+<mat-toolbar color="secondary" class="toolbar-full">
+  <mat-toolbar-row class="header-row-main">
+
+    <!-- Logo - esquerra -->
+    <div class="logo-wrapper">
+      <img src="Logo.png" alt="S" class="logo-img" />
+      <span class="logo-text">Enteixinat</span>
+    </div>
+
+    <!-- Nav - centre absolut -->
+    <nav class="nav-center">
+      <button
+        mat-button
+        [routerLink]="['home']"
+        routerLinkActive="active-link"
+        class="nav-btn"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >Inici</button>
+      <button mat-button [routerLink]="['plantes']" [disabled]="!user()" class="nav-btn">Plantes</button>
+      <button mat-button [routerLink]="['plantes/detall']" [disabled]="!user()" class="nav-btn">Administrar</button>
+      <button mat-button [routerLink]="['plantes/mapa']" class="nav-btn">Mapa</button>
+      <button mat-button [routerLink]="['login']" class="nav-btn">Login</button>
+      <button mat-button [routerLink]="['register']" class="nav-btn">Registre</button>
+    </nav>
+
+    <!-- Accions dreta -->
+    <div class="header-actions">
+      @if (user() !== null) {
+        <string-research></string-research>
+      }
+    </div>
+
+  </mat-toolbar-row>
+
+  @if (user() !== null) {
+    <mat-toolbar-row class="header-row-user">
+      <span class="spacer"></span>
+      <a
+        matButton
+        [routerLink]="['/profile']"
+        class="nav-btn slim"
+      >{{ user().email }}</a>
+      <span class="btn-back" (click)="logOut()">&#x2192; Logout</span>
+      <span class="spacer"></span>
+    </mat-toolbar-row>
+  }
+</mat-toolbar>

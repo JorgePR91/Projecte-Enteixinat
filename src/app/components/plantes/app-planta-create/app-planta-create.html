@@ -1,0 +1,74 @@
+<div class="home-container">
+  <mat-card class="full-page-card">
+    <mat-card-header class="card-header">
+      <mat-card-title>Nova Planta</mat-card-title>
+    </mat-card-header>
+    <form class="form-container" (submit)="crear($event)">
+
+      <mat-form-field class="full-input">
+        <mat-label>Nom</mat-label>
+        <input matInput type="text" [formField]="plantaForm.nom" />
+        @if (plantaForm.nom().touched() && plantaForm.nom().invalid()) {
+          @for (err of plantaForm.nom().errors(); track err.kind) {
+            <mat-error>{{ err.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+<button type="button" class="btn-sm" (click)="obtenerUbicacion()">
+        Ubicació actual
+      </button>
+      @if (error()) {
+  <p style="color: red;">{{ error() }}</p>
+}
+
+      <mat-form-field class="full-input">
+        <mat-label>Latitud</mat-label>
+        <input matInput type="number" [formField]="plantaForm.latitud" />
+        @if (plantaForm.latitud().touched() && plantaForm.latitud().invalid()) {
+          @for (err of plantaForm.latitud().errors(); track err.kind) {
+            <mat-error>{{ err.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <mat-form-field class="full-input">
+        <mat-label>Longitud</mat-label>
+        <input matInput type="number" [formField]="plantaForm.longitud" />
+        @if (plantaForm.longitud().touched() && plantaForm.longitud().invalid()) {
+          @for (err of plantaForm.longitud().errors(); track err.kind) {
+            <mat-error>{{ err.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <mat-form-field class="full-input">
+        <mat-label>Capacitat (kW)</mat-label>
+        <input matInput type="number" [formField]="plantaForm.capacitat" />
+        @if (plantaForm.capacitat().touched() && plantaForm.capacitat().invalid()) {
+          @for (err of plantaForm.capacitat().errors(); track err.kind) {
+            <mat-error>{{ err.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <div class="full-input">
+        <label>Foto de la planta</label>
+        <input type="file" accept="image/*" (change)="enSeleccionarFitxer($event)" [disabled]="pujant()" />
+        @if (previsualitzacio()) {
+          <img [src]="previsualitzacio()" alt="Previsualització" class="previsualitzacio-foto" />
+        }
+      </div>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="btn-submit"
+        [disabled]="plantaForm().invalid() || !plantaForm().touched() || pujant()"
+      >
+        {{ pujant() ? 'Pujant imatge...' : 'Crear' }}
+      </button>
+      <a class="btn-back" (click)="tornar()">&#8592; Tornar</a>
+    </form>
+  </mat-card>
+</div>

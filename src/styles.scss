@@ -1,0 +1,265 @@
+@use '@angular/material' as mat;
+
+// ── Google Fonts ───────────────────────────────────────────────────────────────
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+// ── Angular Material core (tipografia, ripple, overlays…) ─────────────────────
+@include mat.core();
+
+// ── Tema M3 – paleta solar (taronja/groc) ─────────────────────────────────────
+$solar-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$orange-palette,
+    tertiary: mat.$yellow-palette,
+  ),
+  typography: (
+    brand-family: 'Space Grotesk, sans-serif',
+    plain-family: 'Outfit, sans-serif',
+    bold-weight: 700,
+  ),
+  density: (
+    scale: 0,
+  ),
+));
+
+html {
+  min-height: 100vh;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+}
+
+html {
+  @include mat.all-component-themes($solar-theme);
+}
+
+// ── CSS Variables (tokens de color per a Tailwind) ────────────────────────────
+:root {
+  // Fons i text
+  --background:         0   0%  100%;
+  --foreground:       222  84%    5%;
+
+  // Cards
+  --card:               0   0%  100%;
+  --card-foreground:  222  84%    5%;
+
+  // Bores i inputs
+  --border:           214  32%   91%;
+  --input:            214  32%   91%;
+  --ring:              25  95%   53%;
+
+  // Primary – taronja solar
+  --primary:           25  95%   53%;
+  --primary-foreground: 0   0%  100%;
+
+  // Secondary – groc
+  --secondary:         45  93%   47%;
+  --secondary-foreground: 0 0%    0%;
+
+  // Muted
+  --muted:            210  40%   96%;
+  --muted-foreground: 215  16%   47%;
+
+  // Accent
+  --accent:           210  40%   96%;
+  --accent-foreground: 222 47%   11%;
+
+  // Destructiu
+  --destructive:        0  84%   60%;
+  --destructive-foreground: 210 40% 98%;
+
+  // Info – blau (rgb 54 162 235)
+  --info:             207  82%   57%;
+  --info-foreground:    0   0%  100%;
+
+  // Border radius global
+  --radius: 0rem;
+}
+
+// ── Layout global ─────────────────────────────────────────────────────────────
+.app-header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid hsl(var(--border));
+  background-color: rgb(255 255 255 / 0.9);
+  backdrop-filter: blur(12px);
+}
+
+.app-main {
+  flex: 1;
+}
+
+.home-container,
+.xarxaPlantes,
+.container {
+  width: 90%;
+  margin-inline: auto;
+}
+
+mat-card {
+  border-radius: 3px;
+}
+
+// ── Button System ──────────────────────────────────────────────────────────────
+// Base reset compartit
+.btn-link,
+.btn-back,
+.btn-sm,
+.btn-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  background: transparent;
+  border: none;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+// 1. Enllaç — com els del nav, ghost sense vora (blau informatiu)
+.btn-link {
+  padding: 0.375rem 0.625rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--info));
+  &:hover {
+    color: hsl(207 82% 42%);
+    background: hsl(var(--info) / 0.08);
+  }
+}
+
+// 2. Enrere / Cancel·lar / Logout — contorn prim, compacte
+.btn-back {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: hsl(var(--muted-foreground));
+  &:hover {
+    background: hsl(var(--muted));
+    color: hsl(var(--foreground));
+  }
+}
+
+// 3. Petit — accions inline (taula, targetes)
+.btn-sm {
+  padding: 0.15rem 0.5rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  &:hover {
+    background: hsl(var(--muted));
+    color: hsl(var(--foreground));
+    border-color: hsl(215 16% 70%);
+  }
+  &.danger {
+    color: hsl(var(--destructive));
+    border-color: hsl(var(--destructive) / 0.4);
+    &:hover { background: hsl(var(--destructive) / 0.08); }
+  }
+  &.info {
+    color: hsl(var(--info));
+    border-color: hsl(var(--info) / 0.4);
+    &:hover { background: hsl(var(--info) / 0.08); }
+  }
+}
+
+// 4. Live toggle — estret, per a isRunning
+.btn-live {
+  padding: 0.2rem 0.6rem;
+  border: 1px solid hsl(142 71% 45%);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: hsl(142 71% 30%);
+  &:hover { background: hsl(142 71% 45% / 0.1); }
+  &.stop {
+    border-color: hsl(var(--destructive));
+    color: hsl(var(--destructive));
+    &:hover { background: hsl(var(--destructive) / 0.08); }
+  }
+}
+
+// 5. Enviar formulari — centrat, no s'estira
+button[type="submit"].btn-submit {
+  align-self: center;
+}
+
+// 6. Acció principal (Nova Planta, etc.) — no ocupa tota la fila
+.btn-create {
+  align-self: flex-start;
+}
+
+// ── Leaflet Popup ───────────────────────────────────────────────────────────
+.leaflet-popup-content-wrapper {
+  border-radius: 4px !important;
+  border-top: 3px solid #f59e0b;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  padding: 0 !important;
+  font-family: 'Outfit', sans-serif;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  font-family: 'Outfit', sans-serif;
+}
+
+.leaflet-popup-tip {
+  background: #fff !important;
+}
+
+.infoPlanta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.75rem 1rem 0.75rem;
+  min-width: 160px;
+
+  .nom-planta {
+    font-size: 1rem;
+    font-weight: 700;
+    color: hsl(222, 84%, 5%);
+  }
+
+  .cap-planta {
+    font-size: 0.875rem;
+    color: hsl(215, 16%, 47%);
+  }
+
+  .botoDetall {
+    margin-top: 0.5rem;
+    align-self: flex-start;
+    padding: 0.2rem 0.625rem;
+    border-radius: 4px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid rgba(54, 162, 235, 0.4);
+    color: rgb(54, 162, 235);
+    transition: background 0.15s;
+
+    &:hover {
+      background: rgba(54, 162, 235, 0.08);
+    }
+  }
+}

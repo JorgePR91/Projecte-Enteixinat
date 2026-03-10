@@ -1,0 +1,72 @@
+@if(id()){
+<div class="home-container">
+  <mat-card class="full-page-card">
+    <mat-card-header class="card-header">
+      <mat-card-title>Editar Planta</mat-card-title>
+    </mat-card-header>
+    <form class="form-container" (submit)="actualitzar($event)">
+
+      <mat-form-field class="full-input">
+        <mat-label>Nom</mat-label>
+        <input matInput type="text" [formField]="profileForm.nom" />
+        @if (profileForm.nom().touched() && profileForm.nom().invalid()) {
+          @for (err of profileForm.nom().errors(); track err.kind) {
+            <mat-error>{{ err.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <mat-form-field class="full-input">
+        <mat-label>Latitud</mat-label>
+        <input matInput type="number" [formField]="profileForm.latitud" />
+        @if (profileForm.latitud().touched() && profileForm.latitud().invalid()) {
+          @for (err of profileForm.latitud().errors(); track err.kind) {
+            <mat-error>{{ err.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <mat-form-field class="full-input">
+        <mat-label>Longitud</mat-label>
+        <input matInput type="number" [formField]="profileForm.longitud" />
+        @if (profileForm.longitud().touched() && profileForm.longitud().invalid()) {
+          @for (err of profileForm.longitud().errors(); track err.kind) {
+            <mat-error>{{ err.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <mat-form-field class="full-input">
+        <mat-label>Capacitat (kW)</mat-label>
+        <input matInput type="number" [formField]="profileForm.capacitat" />
+        @if (profileForm.capacitat().touched() && profileForm.capacitat().invalid()) {
+          @for (err of profileForm.capacitat().errors(); track err.kind) {
+            <mat-error>{{ err.message }}</mat-error>
+          }
+        }
+      </mat-form-field>
+
+      <div class="full-input">
+        <label>Foto de la planta</label>
+        @if (previsualitzacio()) {
+          <img [src]="previsualitzacio()" alt="Previsualització nova" class="previsualitzacio-foto" />
+        } @else if (formModel().foto) {
+          <img [src]="formModel().foto" alt="Foto actual" class="previsualitzacio-foto" />
+        }
+        <input type="file" accept="image/*" (change)="enSeleccionarFitxer($event)" [disabled]="pujant()" />
+      </div>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="btn-submit"
+        [disabled]="profileForm().invalid() || !profileForm().touched() || pujant()"
+      >
+        {{ pujant() ? 'Pujant imatge...' : 'Actualitzar' }}
+      </button>
+      <a class="btn-back" (click)="sortir()">&#8592; Sortir</a>
+    </form>
+  </mat-card>
+</div>
+}

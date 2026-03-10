@@ -1,0 +1,73 @@
+<div class="container">
+  <mat-card class="full-page-card">
+    <mat-card-content>
+      @if (planta() && planta() !== null) {
+        <mat-card-header class="card-header">
+          <mat-card-title>{{ planta()?.nom }}</mat-card-title>
+        </mat-card-header>
+
+        <div class="foto-grafic">
+          <img class="foto-planta" [src]="getImageUrl()" alt="{{ planta()?.nom }}" />
+          <canvas #chart class="grafic"></canvas>
+        </div>
+
+        <mat-card-content class="detall-info">
+          <ul>
+            <li><span class="label">Usuari</span> {{ usuari() }}</li>
+            <li>
+              <span class="label">Ubicació</span> {{ planta()?.ubicacio?.lat }},
+              {{ planta()?.ubicacio?.lon }}
+            </li>
+            <li><span class="label">Capacitat</span> {{ planta()?.capacitat }} kW</li>
+            <li><span class="label">Data de creació</span> {{ planta()?.created_at }}</li>
+          </ul>
+        </mat-card-content>
+        <mat-card-actions>
+          <button class="btn-back">&#8592; Tornar</button>
+        </mat-card-actions>
+      } @else if (planta() === undefined) {
+        <h1>No s'ha pogut carregar la planta</h1>
+      } @else {
+        <h1>Carregant la planta…</h1>
+      }
+    </mat-card-content>
+
+    <mat-card-header class="card-header registres-header">
+      <mat-card-title>Registres</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <button
+        type="button"
+        [class]="registreservice.isRunning() ? 'btn-live stop' : 'btn-live'"
+        (click)="registreservice.toggleRegistration()"
+      >
+        {{ registreservice.isRunning() ? '⏹ Detener' : '▶ Ver en vivo' }}
+        </button>
+      <table mat-table [dataSource]="registresPagina()" class="mat-elevation-z8">
+        @for (camp of camps; track camp) {
+          <ng-container [matColumnDef]="camp">
+            <th mat-header-cell *matHeaderCellDef>{{ camp | uppercase }}</th>
+            <td mat-cell *matCellDef="let fila">
+              @if (camp === 'created_at') {
+                {{ fila[camp] | date: 'dd/MM/yyyy HH:mm:ss' }}
+              } @else if (camp === 'consum' || camp === 'generacio') {
+                {{ fila[camp] | roundPipe }}
+              } @else {
+                {{ fila[camp] }}
+              }
+            </td>
+          </ng-container>
+        }
+        <tr mat-header-row *matHeaderRowDef="camps"></tr>
+        <tr mat-row *matRowDef="let row; columns: camps"></tr>
+      </table>
+      <div class="paginacio">
+        <button [disabled]="pagina() === 0" (click)="anteriorPagina()">&#8592;</button>
+        <span>{{ pagina() + 1 }} / {{ totalPagines() }}</span>
+        <button [disabled]="pagina() + 1 >= totalPagines()" (click)="seguentPagina()">
+          &#8594;
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

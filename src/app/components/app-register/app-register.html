@@ -1,0 +1,91 @@
+<div class="home-container">
+  <mat-card class="full-page-card">
+    <mat-card-title class="card-header"> Register </mat-card-title>
+    <form [formGroup]="registerForm" class="form-container" (ngSubmit)="register()">
+      @if (registerForm.controls['email'].errors) {
+        @for (err of getFormErrorsToMissatge('email'); track err) {
+          <mat-error align="start"> {{ err }} </mat-error>
+        }
+      }
+      <mat-form-field class="full-input">
+        <mat-label>Enter your email</mat-label>
+        <input
+          matInput
+          type="text"
+          id="inputEmail"
+          formControlName="email"
+          #input
+          placeholder="Ex. solar@solar.es"
+          (input)="onInput($event)"
+        />
+      </mat-form-field>
+
+      @if (registerForm.controls['password'].errors) {
+        @for (err of getFormErrorsToMissatge('password'); track err) {
+          <mat-error align="start"> {{ err }} </mat-error>
+        }
+      }
+      <mat-form-field class="full-input">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          id="inputPassword"
+          formControlName="password"
+          #input
+          (input)="onInput($event)"
+        />
+      </mat-form-field>
+
+      @if (registerForm.controls['repassword'].errors) {
+        @for (err of getFormErrorsToMissatge('password'); track err) {
+          <mat-error align="start"> {{ err }} </mat-error>
+        }
+      }
+      <mat-form-field class="full-input">
+        <mat-label>Rewrite Password</mat-label>
+        <input
+          matInput
+          type="password"
+          id="inputPassword"
+          formControlName="repassword"
+          #input
+          (input)="onInput($event)"
+        />
+      </mat-form-field>
+
+      @if (errorFormMessage()) {
+        <mat-error>{{ errorFormMessage() }}</mat-error>
+      }
+      <button mat-raised-button type="submit" color="primary" class="btn-submit" [disabled]="!registerForm.valid">
+        Registrar-se
+      </button>
+
+      <a class="btn-link" [routerLink]="['/login']">Ja estàs registrat?</a>
+      <!-- <mat-form-field>
+        <mat-label>Select me</mat-label>
+        <mat-select>
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+        <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+      </mat-form-field> -->
+    </form>
+    <!--
+    <span>Error de form</span>
+    <pre>{{ registerForm.errors | json }}</pre>
+    <span>Error de camp Email</span>
+    <pre>{{ registerForm.controls['email'].errors | json }}</pre>
+    <pre>{{ errorFormMessage() | json }}</pre>
+    <span>Error de contrasenya</span>
+    <pre>{{ registerForm.controls['repassword'].errors | json }}</pre>
+    <span>Error de recontrasenya</span>
+    <pre>{{ registerForm.controls['password'].errors | json }}</pre>
+    <span>Error intern</span>
+    <pre>{{ errorFormMessage() | json }}</pre>
+-->
+  </mat-card>
+</div>
+<!--
+[ngClass]="condició ? resposta positiva, resposta negativa"
+[ngClass="{nomClasse: funció condició, nomClasse: funció condició, nomClasse: funció condició, etc}"]
+-->

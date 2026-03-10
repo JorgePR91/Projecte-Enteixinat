@@ -1,0 +1,19 @@
+<div class="container">
+  <span>
+  <button mat-raised-button color="primary" class="btn-create" routerLink="/plantes/crear">Nova Planta</button>
+
+  @if (destacats() > 0) {
+    <h2>Destacats: {{ destacats() }}</h2>
+  }
+</span>
+  <div class="xarxaPlantes">
+
+  @if (!plantas()) {
+    <p>No hi ha plantes solars disponibles.</p>
+  } @else {
+    @for (planta of plantas(); track planta.id) {
+      <app-planta-card [planta]="planta" (destacarChange)="onDestacarChange($event)"> </app-planta-card>
+    }
+  }
+</div>
+</div>

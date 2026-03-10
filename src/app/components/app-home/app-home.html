@@ -1,0 +1,45 @@
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-badge">
+      <mat-icon>bolt</mat-icon>
+      Gestió d'energia solar
+    </span>
+    <h1 class="hero-title">
+      Controla la teva<br>
+      <span class="hero-accent">xarxa solar</span><br>
+      des d'un sol lloc
+    </h1>
+    <p class="hero-subtitle">
+      Monitoritza la generació i el consum de les teves instal·lacions fotovoltaiques
+      en temps real, visualitza-les al mapa i gestiona-les fàcilment.
+    </p>
+    <div class="hero-actions">
+      @if (user()) {
+        <a routerLink="/plantes" class="btn-hero-primary">
+          <mat-icon>grid_view</mat-icon>
+          Les meves plantes
+        </a>
+        <a routerLink="/plantes/mapa" class="btn-hero-secondary">
+          <mat-icon>map</mat-icon>
+          Veure al mapa
+        </a>
+      } @else {
+        <a routerLink="/register" class="btn-hero-primary">
+          <mat-icon>person_add</mat-icon>
+          Comença gratis
+        </a>
+        <a routerLink="/login" class="btn-hero-secondary">
+          Iniciar sessió
+        </a>
+      }
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="solar-grid-bg">
+      @for (cell of gridCells; track $index) {
+        <div class="grid-cell" [class.active]="cell"></div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+<mat-card class="example-card" appearance="outlined" [ngClass]="{'card-destacada': destacada()}">
+  <mat-card-header>
+    <mat-card-title>{{ planta().nom }}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image [src]="getImageUrl()" alt="{{ planta().nom }}">
+  <mat-card-content>
+    <ul>
+      <li> Ubicacio: {{ planta().ubicacio.lat }}, {{ planta().ubicacio.lon }} </li>
+      <li [ngStyle]="{'color': getCapacitatColor()}"> Capacitat: {{ planta().capacitat }} kW </li>
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    <a class="btn-link" [routerLink]="['/planta', planta().id ]">Consultar</a>
+    <button class="btn-sm" (click)="toggleDestacar()">{{ destacada() ? '★ Destacada' : '☆ Destacar' }}</button>
+  </mat-card-actions>
+</mat-card>
+
+

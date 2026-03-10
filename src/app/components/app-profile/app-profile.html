@@ -1,0 +1,115 @@
+<div class="home-container">
+  <mat-card class="full-page-card">
+    <mat-card-title class="card-header"> Profile </mat-card-title>
+    <form class="form-container" (submit)="actualitzar($event)">
+      <mat-form-field class="full-input">
+        <!-- <mat-label>Enter your email</mat-label> -->
+        <input
+          matInput
+          type="text"
+          id="inputEmail"
+          [formField]="profileForm.email"
+          #input
+          (input)="onInput($event)"
+        />
+      </mat-form-field>
+
+      @if (profileForm.password().touched() && profileForm.password().invalid()) {
+        @for (err of profileForm.password().errors(); track err.kind) {
+          <mat-error align="start"> {{ err.message }} </mat-error>
+        }
+      }
+      <mat-form-field class="full-input">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          id="inputPassword"
+          [formField]="profileForm.password"
+          #input
+          (input)="onInput($event)"
+        />
+      </mat-form-field>
+
+      @if (profileForm.repassword().touched() && profileForm.repassword().invalid()) {
+        @for (err of profileForm.repassword().errors(); track err.kind) {
+          <mat-error align="start"> {{ err.message }} </mat-error>
+        }
+      }
+      <mat-form-field class="full-input">
+        <mat-label>Rewrite Password</mat-label>
+        <input
+          matInput
+          type="password"
+          id="inputRepassword"
+          [formField]="profileForm.repassword"
+          #input
+          (input)="onInput($event)"
+        />
+      </mat-form-field>
+
+      @if (profileForm.username().touched() && profileForm.username().invalid()) {
+        @for (err of profileForm.username().errors(); track err.kind) {
+          <mat-error align="start"> {{ err.message }} </mat-error>
+        }
+      }
+      <mat-form-field class="full-input">
+        <mat-label>Nom d'usuari</mat-label>
+        <input
+          matInput
+          type="text"
+          id="inputUsername"
+          [formField]="profileForm.username"
+          #input
+          (input)="onInput($event)"
+        />
+      </mat-form-field>
+
+      @if (profileForm.fullname().touched() && profileForm.fullname().invalid()) {
+        @for (err of profileForm.fullname().errors(); track err.kind) {
+          <mat-error align="start"> {{ err.message }} </mat-error>
+        }
+      }
+      <mat-form-field class="full-input">
+        <mat-label>Nom complet d'usuari</mat-label>
+        <input
+          matInput
+          type="text"
+          id="inputFullname"
+          [formField]="profileForm.fullname"
+          #input
+          (input)="onInput($event)"
+        />
+      </mat-form-field>
+
+      @if (profileForm.phone().touched() && profileForm.phone().invalid()) {
+        @for (err of profileForm.phone().errors(); track err.kind) {
+          <mat-error align="start"> {{ err.message }} </mat-error>
+        }
+      }
+      <mat-form-field class="full-input">
+        <mat-label>Telèfon</mat-label>
+        <input
+          matInput
+          type="text"
+          id="inputPhone"
+          [formField]="profileForm.phone"
+          #input
+          (input)="onInput($event)"
+        />
+      </mat-form-field>
+
+      @if (profileForm.email().touched() && profileForm.email().invalid()) {
+        <div class="error-messages">
+          @for (err of profileForm.email().errors(); track err.kind) {
+            <span class="error-message">{{ err.message }}</span>
+          }
+        </div>
+      }
+      <button mat-raised-button type="submit" color="primary" class="btn-submit" [disabled]="profileForm().invalid() || !profileForm().touched()">
+        Actualitzar
+      </button>
+      <a class="btn-back" [routerLink]="['/home']">&#8592; Sortir</a>
+    </form>
+  </mat-card>
+</div>
