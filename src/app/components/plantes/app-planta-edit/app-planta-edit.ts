@@ -6,7 +6,6 @@ import { MatCard, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterLink } from '@angular/router';
 import { Planta } from '../../../interfaces/planta';
 import { Supaservice } from '../../../services/supaservice';
 
@@ -26,7 +25,6 @@ type PlantaEdit = Omit<Planta, 'created_at' | 'usuari' | 'favorite' | 'ubicacio'
     MatCardHeader,
     MatCardTitle,
     MatButtonModule,
-    RouterLink,
     FormField,
   ],
   templateUrl: './app-planta-edit.html',

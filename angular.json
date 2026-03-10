@@ -30,11 +30,19 @@
                 "input": "public"
               }
             ],
+            "scripts": [
+              "node_modules/leaflet/dist/leaflet.js",
+              "node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"
+            ],
             "styles": [
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/leaflet.markercluster/dist/MarkerCluster.css",
               "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
               "src/styles.scss"
+            ],
+            "externalDependencies": [
+              "leaflet",
+              "leaflet.markercluster"
             ]
           },
           "configurations": {
