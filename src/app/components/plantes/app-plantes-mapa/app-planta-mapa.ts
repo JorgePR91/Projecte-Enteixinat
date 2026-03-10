@@ -87,9 +87,9 @@ export class AppPlantaMapa implements OnInit, AfterViewInit, OnDestroy {
                M38 56h6v6h-6z M47 56h6v6h-6z M56 56h6v6h-6z" fill="#F88C1E"/>
     </svg>`,
         className: 'marker-svg-custom',
-        iconSize: [30, 30],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -48],
+        iconSize: [35, 42],
+        iconAnchor: [17, 42],
+        popupAnchor: [0, -42],
       });
 
       const popUp = `
