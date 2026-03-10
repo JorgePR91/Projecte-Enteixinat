@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as L from 'leaflet';
 
-// Import leaflet.markercluster to extend L
-import 'leaflet.markercluster';
-
 declare global {
   namespace L {
     function markerClusterGroup(options?: any): any;
