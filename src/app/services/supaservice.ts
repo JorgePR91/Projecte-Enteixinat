@@ -163,7 +163,7 @@ export class Supaservice {
       return;
     } else return Object.keys(data[0]);
   }
-  // MÈTODE COPIAT DE IA PERQUÈ TYPESCRIPT NO DEIXA FER metadata[element] DINS D'UN FOREACH PER A ELIMINAR ELS CAMPS BUITS, JA QUE SALTA EL ERROR DE POT SER ANY. COM NO SÉ CÓM FER EIXA ITERACIÓ I AL VORER LA SOLUCIÓ DE LA IA COMPROVE QUE MAI PODRIA HAVER-HO FET COPIE EL SEU MÈTODE.
+
   cleanMetadata<T extends object>(obj: T): Partial<T> {
     const result: Partial<T> = {};
     for (const key of Object.keys(obj) as Array<keyof T>) {

@@ -1,59 +1,126 @@
-# AppPlaquesSolars
+# ☀️ Enteixinat — Solar Plant Manager
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.5.
+> **La red inteligente para el control total de tu energía fotovoltaica.**
 
-## Development server
+**Enteixinat** (enrejado en catalán) no es solo una app; es el nexo visual entre tus paneles y tú. Inspirada en la geometría de los tejados solares, esta plataforma web permite gestionar, monitorizar y optimizar instalaciones desde cualquier lugar.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## 📸 Screenshots
+
+#### Vista Grid 
+![Grid view](public/screenshots/grid.png)
+#### Vista Mapa
+![Map view](public/screenshots/mapa.png)
+#### Vista Tabla
+![Table view](public/screenshots/table.png)
+#### Detalle de Planta 
+![Plant detail](public/screenshots/detalle.png)
+#### Login
+![Login](public/screenshots/login.png)
+
+---
+
+## 🚀 Características Principales
+
+| Funcionalidad | Descripción |
+| --- | --- |
+| **Gestión Integral** | 🏗️ Alta, edición y baja de plantas con capacidad en kW y fotos personalizadas. |
+| **Geolocalización** | 📍 Captura de coordenadas GPS con un clic e integración con mapas interactivos. |
+| **Visualización 360°** | 🔄 Tres vistas conmutables: **Grid** (visual), **Tabla** (admin) y **Mapa** (geo). |
+| **Smart Monitoring** | 📈 Gráficos en tiempo real con curvas de generación y consumo realistas. |
+| **Seguridad Pro** | 🔐 Autenticación robusta y perfiles de usuario mediante Supabase Auth. |
+
+---
+
+## 🛠️ Stack Tecnológico (Vanguardia 2026)
+
+| Categoría | Herramienta | Icono |
+| --- | --- | --- |
+| **Framework** | **Angular 21** (Standalone + Signals) | 🅰️ |
+| **Backend** | **Supabase** (PostgreSQL + Storage) | ⚡ |
+| **Mapas** | **Leaflet 1.9** + Cluster Engine | 🗺️ |
+| **Gráficos** | **Chart.js 4** | 📊 |
+| **UI Kit** | **Angular Material** (Material 3 Design) | 🎨 |
+
+---
+
+## 🧠 Aspectos Técnicos Destacados
+
+### ⚡ Angular Signals: El Nuevo Corazón Reactivo
+
+Hemos dicho adiós a la complejidad de los stores externos. La reactividad fluye a través de **Signals**, permitiendo una actualización de la UI ultra eficiente.
+
+```ts
+// Filtro de búsqueda ultra-rápido mediante computed signals
+plantesSignal = signal<Planta[]>([]);
+textRecerca = signal<string>('');
+
+plantesSignalFiltered = computed(() =>
+  this.plantesSignal().filter(p =>
+    p.nom.toLowerCase().includes(this.textRecerca().toLowerCase())
+  )
+);
+
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 🛰️ Monitorización con Simulación Realista
 
-## Code scaffolding
+El servicio `RegistreDemo` no genera números al azar; recrea una **curva de Gauss** para simular la producción solar real (pico al mediodía, silencio nocturno) con ruido atmosférico suavizado.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 🗺️ Integración Leaflet & Angular Router
 
-```bash
-ng generate component component-name
+Los popups del mapa no son simples etiquetas; están inyectados en el ciclo de vida de Angular para permitir navegación directa desde el marcador:
+
+```ts
+// Puente entre el DOM de Leaflet y el Router de Angular
+marker.bindPopup(popup).on('popupopen', () => {
+  document.getElementById(`btn-${p.id}`)
+    ?.addEventListener('click', () => this.router.navigate(['/planta', p.id]));
+});
+
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
+
+## 🎨 Sistema de Diseño (Design System)
+
+### 🌈 Paleta de Colores
+
+Utilizamos una paleta cálida y funcional que evoca la energía del sol:
+
+* **Primary** (`#f59e0b`): 🟠 El naranja solar para acciones principales.
+* **Info** (`rgb(54, 162, 235)`): 🔵 El azul tecnológico para navegación y datos.
+* **Destructive** (`#dc2626`): 🔴 Para alertas y borrados seguros.
+
+### ✍️ Tipografía con Personalidad
+
+* **Space Grotesk**: Para un logo y unos headers con aire futurista y técnico.
+* **Outfit**: Para una lectura cómoda y moderna en el cuerpo de texto.
+
+---
+
+## 📁 Estructura del Ecosistema
 
 ```bash
-ng generate --help
+src/app/
+├── 🧩 components/        # UI Modular (Header, Grid, Detalle...)
+├── ⚙️ services/          # Lógica: Supabase, Mapas, Simulador Solar
+├── 🛡️ guards/            # Protección de rutas funcional
+├── 🧪 interfaces/        # Contratos de datos (Planta, User, Registre)
+└── 🛠️ pipes/             # Transformación de datos (Round, Format)
+
 ```
 
-## Building
+---
 
-To build the project run:
+## ⚙️ Instalación en 3 Pasos
 
-```bash
-ng build
-```
+1. **Clonar:** `git clone <url-del-repo>`
+2. **Preparar:** `npm install`
+3. **Despegar:** `ng serve`
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+> [!IMPORTANT]
+> No olvides configurar tus variables de entorno en `src/environments/environment.ts` con tus `SUPABASE_URL` y `SUPABASE_KEY`.
 
-## Running unit tests
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

@@ -77,7 +77,16 @@ export class AppPlantaMapa implements OnInit, AfterViewInit, OnDestroy {
       if (planta.ubicacio.lat == null && planta.ubicacio.lon == null) return;
 
       const myIcon = L.divIcon({
-        iconUrl: 'marker.svg',
+        html: `
+    <svg viewBox="0 0 100 120" width="35" height="42" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 0C22.4 0 0 22.4 0 50c0 35 50 70 50 70s50-35 50-70C100 22.4 77.6 0 50 0z" fill="#F88C1E"/>
+      <circle cx="50" cy="50" r="38" fill="white"/>
+      <rect x="25" y="25" width="50" height="50" rx="2" fill="#1D3557"/>
+      <path d="M38 38h6v6h-6z M47 38h6v6h-6z M56 38h6v6h-6z
+               M38 47h6v6h-6z M47 47h6v6h-6z M56 47h6v6h-6z
+               M38 56h6v6h-6z M47 56h6v6h-6z M56 56h6v6h-6z" fill="#F88C1E"/>
+    </svg>`,
+        className: 'marker-svg-custom',
         iconSize: [30, 30],
         iconAnchor: [24, 24],
         popupAnchor: [0, -48],
